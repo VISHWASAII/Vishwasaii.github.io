@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Card</title>
+    <!-- Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="Birthday-Gift-Card.css" />
+  </head>
+  <body>
+    <div id="app">
+      <birthday-card/>
+       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+       <script>
+        let app = Vue.createApp({})
+        app.component('birthday-card',{
+          template:`
+          <div class="card">
+            <div class="outside">
+              <div class="front">
+                <p id="fonst">{{wishes}}</p>
+                <p id="click-here">{{clickhere}}</p>
+              </div>
+              <div class="back"></div>
+            </div>
+            <div class="inside">
+              <p id="papins" placeholder="Magic" >{{ arrayChars }}</p>
+              <input type="text" id="pretty" placeholder="Type Something Here" v-model="inputValue" @input="updateArray">
+            </div>
+          </div>
+          `,
+          data(){
+            return{
+              inputValue: "",
+              datavalue: 0,
+              dummyArray: ['W', 'i', 's', 'h', 'i', 'n', 'g', ' ',
+                'y', 'o', 'u', ' ', 'a', ' ', 'v', 'e', 'r', 'y', ' ',
+                'h', 'a', 'p', 'p', 'y', ' ', 'b', 'i', 'r', 't', 'h', 'd', 'a', 'y', ' ',
+                'f', 'i', 'l', 'l', 'e', 'd', ' ', 'w', 'i', 't', 'h', ' ', 'l', 'o', 'v', 'e', ' ', 'a', 'n', 'd', ' ', 'l', 'a', 'u', 'g', 'h', 't', 'e', 'r','. ',' ','m', 'y', ' ', 's', 'w', 'e', 'e', 't', ' ', 'h', 'e', 'a', 'r', 't', ' ', '-', ' ', 's', 'a', 'r', 'a', 'n', 'g', 'h', 'a', 'e','💗'], // Dummy array with some values
+              arrayChars: "",
+              wishes : "Happy Birthday Kirthika",
+              clickhere : "Click Here"
+            }
+          },
+          methods: {
+            updateArray(){
+              // Update datavalue based on the length of inputValue
+              this.datavalue = this.inputValue.length;
+
+              // Ensure datavalue is within the range of dummyArray
+              this.datavalue = Math.min(this.datavalue, this.dummyArray.length);
+
+              // Get characters from dummyArray based on datavalue
+              this.arrayChars = this.dummyArray.slice(0, this.datavalue).join('');
+            }
+          }
+        })
+        app.mount('#app');
+       </script>
+    </div>
+  </body>
+</html>
